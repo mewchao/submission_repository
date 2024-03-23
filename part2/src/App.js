@@ -5,6 +5,7 @@ const Display = (props) => {
     <div>{props.counter}</div>
   )
 }
+
 const Button = (props) => {
   return (
     <button onClick={props.onClick}>
@@ -12,6 +13,7 @@ const Button = (props) => {
     </button>
   )
 }
+
 const App = () => {
   const [ counter, setCounter ] = useState(0)
   // 该事件处理程序通过setCounter函数改变App组件的状态。
@@ -28,4 +30,5 @@ const App = () => {
     </div>
   )
 }
+
 export default App
