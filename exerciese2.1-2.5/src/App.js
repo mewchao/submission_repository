@@ -1,7 +1,8 @@
 import './App.css';
 import Course from './components/Course'
 
-const App = () => {
+const App = (props) => {
+
   const courses = [
     {
       name: 'Half Stack application development',
@@ -48,11 +49,13 @@ const App = () => {
   ]
 
   return (
+    
     <div>
       {
         courses.map(course => <Course course={course} />)
       }
     </div>
+    
   )
 
 }
