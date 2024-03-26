@@ -1,15 +1,24 @@
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import Filter from './components/Filter'
+import axios from 'axios'
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', number: '040-123456', id: 1 },
-    { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
-    { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
-    { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
-  ])
+
+  const hook = () => {
+    console.log('effect')
+    const eventHandler = (response) => {
+      console.log('promise fulfilled')
+      setPersons(response.data)
+    }
+    const promise = axios.get('http://localhost:3001/persons')
+    promise.then(eventHandler)
+  }
+
+  useEffect(hook, [])
+
+  const [persons, setPersons] = useState([])
   const [filteredPersons, setFilteredPersons] = useState([...persons]); // 初始化为所有persons
   const [newName, setNewName] = useState('')
   const [newNumber, setnewNumber] = useState('')
