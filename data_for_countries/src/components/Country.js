@@ -1,9 +1,15 @@
-import React from "react"
+import React, { useState } from "react"
+
+import SpecifyCountry from "./SpecifyCountry"
 
 const Country = (props) => {
-    return (
+    let [show , setShow] = useState(true)
+    return ( 
         <div>
-            {props.country.name.common} 
+             {!show ? <SpecifyCountry country={props.country}/> : <div>{props.country.name.common}</div>}
+            <button onClick={() => setShow(!show)}>
+                show {show ? 'specific' : 'easy' }
+            </button>
         </div>
     )
 }
