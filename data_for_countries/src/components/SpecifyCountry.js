@@ -12,7 +12,6 @@ const SpecifyCountry =(props) => {
         };
       });
       
-    //   console.log(mappedLanguages);
       
     return (
         <div>

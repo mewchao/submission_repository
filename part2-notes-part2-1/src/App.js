@@ -46,9 +46,15 @@ const App = () => {
       important: Math.random() < 0.5,
       id: notes.length + 1,
     }
-    // 使用concat数组方法将新笔记添加到笔记列表中
-    setNotes(notes.concat(noteObject))
+    // // 使用concat数组方法将新笔记添加到笔记列表中
+    // setNotes(notes.concat(noteObject))
+    // setNewNote('')
+    axios
+    .post('http://localhost:3001/notes', noteObject)
+    .then(response => {
+    setNotes(notes.concat(response.data))
     setNewNote('')
+    })
   }
 
   const notesToShow = showAll
