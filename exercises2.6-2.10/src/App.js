@@ -23,16 +23,29 @@ const App = () => {
 
   const addPerson = (event) => {
     event.preventDefault()
-
     const isNameExists = persons.some(person => person.name === newName);
+
     if(isNameExists) {
-      alert(`${newName} is already added to phonebook`);
+      if (window.confirm(`Do you really want to replace the ${newName} 's  phonenumber ?`)){
+          const person = persons.find(p => p.name === newName)
+          const changedPerson = { ...person, number : newNumber }
+          // 注意这是异步操作    更新成功后重新获取和设置数据
+          Personservice.update(person.id, changedPerson).then(
+            () =>
+            Personservice.getAll().then(initpersons => {
+              setPersons(initpersons);
+              setFilteredPersons(initpersons);
+            })
+          )
+      }
+      else{
+        alert(`${newName} is already added to phonebook`);
+      }
     } else {
-      const newId = persons.length + 1;
       const newPerson = {
         name: newName,
         number: newNumber,
-        id: String(newId)
+        id: String(persons.length + 1)
       }
       Personservice.create(newPerson).then(returnperson => setPersons(returnperson))
     }

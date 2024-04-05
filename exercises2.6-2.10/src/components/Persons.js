@@ -6,13 +6,17 @@ const Persons =(props) => {
   // console.log(filteredPersons);
   
   const deletePerson = (id) => {
-    Personservice.deleteperson(id).then(() => {
+    if (window.confirm(`Do you really want to delete ${id}?`)) {
+      Personservice.deleteperson(id).then(() => {
         // 删除成功后重新获取和设置数据
         Personservice.getAll().then(initpersons => {
           props.setPersons(initpersons);
           props.setFilteredPersons(initpersons);
         });
     });
+    }else {
+
+    }
 }
 
   if (!props.filteredPersons) 
