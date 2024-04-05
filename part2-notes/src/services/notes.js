@@ -1,12 +1,6 @@
 import axios from 'axios'
 const baseUrl = 'http://localhost:3001/notes'
 
-// const getAll = () => {
-//   const request = axios.get(baseUrl)
-//   return request.then(response =>{
-//     return response.data})
-//     // promise对象
-// }
 const getAll = () => {
     const request = axios.get(baseUrl)
     const nonExisting = {
