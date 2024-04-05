@@ -7,15 +7,22 @@ const Filter = (props) => {
     const handlefilterChange = (event) => {
       const filterValue = event.target.value;
       setfilter(filterValue);
-    //   console.log(filter);
     }
   
     // 添加一个函数来根据过滤条件过滤persons列表
     useEffect(() => {
-    const filtered = props.persons.filter(person => person.name.toLowerCase().includes(filter.toLowerCase()));
-    props.setFilteredPersons(filtered);
-    console.log(filtered);
-    }, [filter, props.persons]);
+      // console.log("2");
+      const filterPersons = () => {
+        if (Array.isArray(props.persons)) {
+          // console.log(props.persons)
+          const filtered = props.persons.filter(person => person.name.toLowerCase().includes(filter.toLowerCase()));
+          props.setFilteredPersons(filtered);
+        } else {
+          console.error('props.persons is not an array');
+        }
+      }
+      filterPersons();
+    }, [filter, props.persons, props.setFilteredPersons]);
   
     return(
       <div>
