@@ -17,7 +17,7 @@ const Persons =(props) => {
     }else {
         
     }
-}
+  }
 
   if (!props.filteredPersons) 
     return (
