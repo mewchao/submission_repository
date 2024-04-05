@@ -32,7 +32,7 @@ const App = () => {
       const newPerson = {
         name: newName,
         number: newNumber,
-        id: newId
+        id: String(newId)
       }
       Personservice.create(newPerson).then(returnperson => setPersons(returnperson))
     }
@@ -61,7 +61,7 @@ const App = () => {
         addPerson={addPerson} 
       />
       <h2>Numbers</h2>
-      <Persons filteredPersons={filteredPersons} />
+      <Persons filteredPersons={filteredPersons} setPersons={setPersons} setFilteredPersons={setFilteredPersons} />
     </div>
   )
 }
