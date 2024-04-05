@@ -3,7 +3,7 @@ import Person from "./Person"
 import Personservice from "../services/Personservice"
 
 const Persons =(props) => {
-  // console.log(filteredPersons);
+
   
   const deletePerson = (id) => {
     if (window.confirm(`Do you really want to delete ${id}?`)) {
@@ -15,7 +15,7 @@ const Persons =(props) => {
         });
     });
     }else {
-
+        
     }
 }
 

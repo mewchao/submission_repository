@@ -3,6 +3,7 @@ import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import Filter from './components/Filter'
 import Personservice from './services/Personservice'
+import Notification from './components/Notification'
 
 const App = () => {
 
@@ -20,6 +21,7 @@ const App = () => {
   const [filteredPersons, setFilteredPersons] = useState([]);
   const [newName, setNewName] = useState('')
   const [newNumber, setnewNumber] = useState('')
+  const [errorMessage, setErrorMessage] = useState(null)
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -35,7 +37,11 @@ const App = () => {
             Personservice.getAll().then(initpersons => {
               setPersons(initpersons);
               setFilteredPersons(initpersons);
-            })
+              setErrorMessage(`changed ${newName} 's phonenumber to ${newNumber}`)
+              setTimeout(() => {
+                setErrorMessage(null)
+              }, 3000)
+            }) 
           )
       }
       else{
@@ -47,7 +53,12 @@ const App = () => {
         number: newNumber,
         id: String(persons.length + 1)
       }
-      Personservice.create(newPerson).then(returnperson => setPersons(returnperson))
+      Personservice.create(newPerson).then(returnperson => {setPersons(returnperson);
+        setErrorMessage(`Added ${newName}`)
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 3000)
+      })
     }
     setNewName('')
     setnewNumber('')
@@ -64,6 +75,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={errorMessage}/>
       <Filter setFilteredPersons={setFilteredPersons}  persons={persons}/>
       <h2>Add a new</h2>
       <PersonForm 
